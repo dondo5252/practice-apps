@@ -6,7 +6,7 @@
     "server-dev": "npx nodemon --watch server server/index.js",
     "client-dev": "npx webpack --watch",
     "build": "npx webpack",
-    "start": "node server/index.js"
+    "start": "nodemon server/index.js & npx babel . --out-dir=compiled --presets=@babel/preset-react --ignore=node_modules,compiled --source-maps=inline --watch"
   },
   "license": "Unlicensed",
   "dependencies": {
@@ -15,6 +15,7 @@
     "@babel/preset-react": "^7.14.5",
     "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
+    "body-parser": "^1.20.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^6.1.4",

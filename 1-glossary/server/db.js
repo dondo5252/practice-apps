@@ -14,16 +14,19 @@ const glossarySchema = new mongoose.Schema ({
 let Glossary = mongoose.model('Glossary', glossarySchema)
 
  let saveInfo = (info) => {
-  console.log(info)
+  console.log(info, 'saveINFO')
   return Glossary.create(info)
  }
+
+
+
 //findoneandupdate
 
  let getAll = () => {
   return Glossary.find({})
   .exec()
  }
-// let saveInfo = (info) => {
+// let saveInfo = (info) => {glossa
 //      console.log(info)
 //     }
 

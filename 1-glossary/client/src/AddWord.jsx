@@ -12,14 +12,15 @@ class AddWord extends React.Component {
   }
 
 addonClick(event) {
+  //if word already exists
   event.preventDefault();
   console.log(this.state.value)
   this.props.addWord(this.state.value, this.state.definition)
   this.props.update(this.state.value, this.state.definition)
-  // this.setState = ({
-  //   value: '',
-  //   definition: ''
-  // })
+  this.setState({
+    value: '',
+    definition: ''
+  })
   console.log('Complete')
 }
 handleChangeWord(event) {

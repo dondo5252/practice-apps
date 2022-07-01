@@ -3,14 +3,21 @@ import React from "react";
 class DefinitionListEntry extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props,'prrroooopppppsss')
     this.handledeleteClick = this.handledeleteClick.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this)
   }
 
   handledeleteClick (event) {
     event.preventDefault();
-    this.props.delete(this.props.value.word)
+    this.props.deleteDef(this.props.value.word, this.props.value.definition)
     console.log( this.props.value.word, 'deleted on click')
+  }
+  handleEditClick (event) {
+    event.preventDefault();
+    let sign = prompt('Change the definition!')
+    console.log(sign, 'SIGGGNN')
+
+
   }
 
 
@@ -18,7 +25,7 @@ class DefinitionListEntry extends React.Component {
     return (
 
       <div>{this.props.value.word}: {this.props.value.definition}
-       <button>Edit</button>
+       <button onClick= {this.handleEditClick}>Edit </button>
       <button onClick={this.handledeleteClick}>Delete</button>
       </div>
 

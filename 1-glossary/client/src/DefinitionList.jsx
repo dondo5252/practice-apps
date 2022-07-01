@@ -5,9 +5,10 @@ var DefinitionList = (props) => {
 
 
   return (
+
     <ul>
      {props.glossary.map((definition, index) =>
-     <DefinitionListEntry key={index}  value={definition} deleteDef={props.deleteDef}/>
+     <DefinitionListEntry key={index}  value={definition} deleteDef={props.deleteDef} patch={props.patch}/>
      )}
     </ul>
   )

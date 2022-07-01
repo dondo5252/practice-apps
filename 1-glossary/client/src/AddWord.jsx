@@ -21,7 +21,6 @@ addonClick(event) {
     value: '',
     definition: ''
   })
-  console.log('Complete')
 }
 handleChangeWord(event) {
   console.log(event.target.value)
@@ -33,21 +32,21 @@ handleChangeDef(event) {
 }
 
 
+
 render() {
   return (
     <div>
       <form>
+        <label> Add a Word:
         <input
         type="text"
-        placeholder="Enter word to add"
+        placeholder="Enter a word..."
         value = {this.state.value}
         onChange={this.handleChangeWord}
-        ></input>
-      </form>
-      <form>
-        <input
+        ></input></label>
+                <input
         type="text"
-        placeholder="Enter definition"
+        placeholder="Enter a definition..."
         value = {this.state.definition}
         onChange={this.handleChangeDef}
         ></input><button

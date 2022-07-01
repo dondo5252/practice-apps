@@ -2,6 +2,7 @@ import React from "react";
 import {render} from "react-dom";
 import AddWord from "./AddWord.jsx"
 import DefinitionList from "./DefinitionList.jsx"
+import Search from "./Search.jsx"
 
 const axios = require ('axios');
 
@@ -9,13 +10,14 @@ const axios = require ('axios');
   constructor(props) {
     super(props);
     this.state = {
-      definitions : [],
-      current: [] //{practice: test, hello:goodbye}
+      definitions : []
     }
     this.addWord = this.addWord.bind(this)
     this.updateDefinitions = this.updateDefinitions.bind(this)
-    this.delete = this.delete.bind(this)
     this.deleteDef = this.deleteDef.bind(this)
+    this.patchyPatch = this.patchyPatch.bind(this)
+    this.filterSearch = this.filterSearch.bind(this)
+    // this.delete = this.delete.bind(this)
     // this.getDefinitions = this.getDefinitions.bind(this)
 
   }
@@ -38,9 +40,20 @@ const axios = require ('axios');
 
   componentDidMount() {
     this.updateDefinitions()
-}
 
+  }
 
+  patchyPatch (wordObj) {
+    console.log('patched')
+    axios.patch('/glossary', wordObj)
+    .then((response) => {
+      console.log(response)
+      this.updateDefinitions()
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
 
 
 ///////CREATE
@@ -49,29 +62,15 @@ const axios = require ('axios');
       word: wordAdded,
       definition: defAdded
     } )
-    .then(function (response) {
-      console.log(response)
+    .then((response) => {
       this.updateDefinitions ()
     })
-    .catch(function (error) {
+    .catch((error) => {
       console.log(error);
     })
   }
 
-//delete
-delete(wordToDelete) {
-  let copydelete = this.state.definitions.slice();
-    for(let i = 0; i < copydelete.length;i++) {
-      var currObj = copydelete[i]
-      // console.log(wordToDelete, " equals " , currObj.word)
-      if (wordToDelete === currObj.word) {
-        // console.log( "before",copydelete)
-        copydelete.splice(i, 1)
-        // console.log( "after",copydelete)
-        this.setState({definitions: copydelete})
-      }
-    }
-  }
+
 
 
 deleteDef(deleteword, deletedef) {
@@ -84,14 +83,27 @@ deleteDef(deleteword, deletedef) {
     console.log(error);
   })
 }
+//filterSearch
+filterSearch(wordSearched) {
+  var container = []
+  var copy = this.state.definitions.slice();
+    for(let i = 0; i < copy.length;i++) {
+      var currWord = copy[i].word;
+      if(currWord.toLowerCase().includes(wordSearched.toLowerCase()))
+        container.push(copy[i])
+        console.log(container, "container")
+        this.setState({definitions: container})
+    }
+}
 
 
 render() {
   return(
   <div>
-    <p>Glossary</p>
+    <h1>Glossary</h1>
+      <Search search={this.filterSearch}/>
       <AddWord addWord={this.addWord} update={this.updateDefinitions} />
-      <DefinitionList glossary={this.state.definitions} deleteDef={this.deleteDef} />
+      <DefinitionList glossary={this.state.definitions} deleteDef={this.deleteDef} patch={this.patchyPatch}/>
   </div>
   )
 };
@@ -100,9 +112,3 @@ render() {
 render(<App />, document.getElementById('root'))
 
 
-// update local storage
-  // updateDefinitions (addWord, addDef) {
-  //   let copy = this.state.definitions.slice()
-  //   copy.push({word:addWord, definition:addDef})
-  //   this.setState({definitions: copy})
-  //   }

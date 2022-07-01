@@ -12,7 +12,7 @@ const glossarySchema = new mongoose.Schema ({
 });
 
 let Glossary = mongoose.model('Glossary', glossarySchema)
-
+//Create
  let saveInfo = (info) => {
   // console.log(info, 'saveINFO')
   return Glossary.create(info)
@@ -20,25 +20,36 @@ let Glossary = mongoose.model('Glossary', glossarySchema)
 
 
 
-//findoneandupdate
 
+//read
  let getAll = () => {
-  // var gloss = Glossary.find()
-  // console.log("db getall", Glossary.find({__v: 0}))
   return Glossary
   .find({})
    .exec()
  }
 
- let deleteWord = (wordObj) => {
-  console.log(wordObj, "Wooorddd OBJ")
-    return Glossary.deleteOne(wordObj)
- }
+
+//update
+  let updateOne = (wordObj) => {
+    var filter = {word: wordObj.word}
+    var update = {definition: wordObj.definition}
+    return Glossary.findOneAndUpdate(filter, update, {
+      new: true
+    })
+  }
+//Delete
+  let deleteWord = (wordObj) => {
+    // console.log(wordObj, "deleted")
+      return Glossary.deleteOne(wordObj)
+   }
+
+
 
 // 3. Export the models
 module.exports.Glossary = Glossary;
 module.exports.save = saveInfo;
 module.exports.get = getAll;
 module.exports.deleteWord = deleteWord
+module.exports.updateOne = updateOne
 // 4. Import the models into any modules that need them
 //

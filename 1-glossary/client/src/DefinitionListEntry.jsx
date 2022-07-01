@@ -5,6 +5,7 @@ class DefinitionListEntry extends React.Component {
     super(props);
     this.handledeleteClick = this.handledeleteClick.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this)
+
   }
 
   handledeleteClick (event) {
@@ -14,23 +15,20 @@ class DefinitionListEntry extends React.Component {
   }
   handleEditClick (event) {
     event.preventDefault();
-    let sign = prompt('Change the definition!')
-    console.log(sign, 'SIGGGNN')
-
-
+    let defPrompt = prompt(`Change the definition for ${this.props.value.word}!`)
+    console.log(defPrompt, "prompt")
+    this.props.patch({word: this.props.value.word, definition: defPrompt})
   }
 
 
   render () {
     return (
-
-      <div>{this.props.value.word}: {this.props.value.definition}
+      <div>-{this.props.value.word}: {this.props.value.definition}
        <button onClick= {this.handleEditClick}>Edit </button>
       <button onClick={this.handledeleteClick}>Delete</button>
       </div>
-
     )
   }
 }
 
-export default DefinitionListEntry
+export default DefinitionListEntry;

@@ -29,7 +29,7 @@ const axios = require ('axios');
 
 //////UPPPPDATE
   updateDefinitions () {
-    axios.get('/glossary')
+    return axios.get('/glossary')
     .then((response) => {
       this.setState({definitions: response.data})
     })
@@ -45,7 +45,7 @@ const axios = require ('axios');
 
   patchyPatch (wordObj) {
     console.log('patched')
-    axios.patch('/glossary', wordObj)
+    return axios.patch('/glossary', wordObj)
     .then((response) => {
       console.log(response)
       this.updateDefinitions()
@@ -58,7 +58,7 @@ const axios = require ('axios');
 
 ///////CREATE
   addWord(wordAdded, defAdded) {
-    axios.post('/glossary', {
+    return axios.post('/glossary', {
       word: wordAdded,
       definition: defAdded
     } )
@@ -74,7 +74,7 @@ const axios = require ('axios');
 
 
 deleteDef(deleteword, deletedef) {
-  axios.delete('/glossary', {data: {word: deleteword, definition: deletedef}})
+  return axios.delete('/glossary', {data: {word: deleteword, definition: deletedef}})
   .then((response) => {
     this.updateDefinitions()
   })

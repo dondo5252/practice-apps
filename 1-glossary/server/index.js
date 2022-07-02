@@ -34,7 +34,7 @@ app.get('/glossary', (req, res) => {
 
 //update
 app.patch('/glossary', (req,res) => {
-  // console.log(req.body, 'boodddyyyyy on update')
+  console.log(req.body, 'boodddyyyyy on update')
   updateOne(req.body)
   .then((response) => {
     res.send(response)

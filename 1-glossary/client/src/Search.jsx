@@ -18,8 +18,11 @@ class Search extends React.Component {
   onClickSearch(event) {
     console.log(this.state.value)
     event.preventDefault();
+    if(!this.state.value) {
+      alert('Please enter a word to search!')
+    } else {
     this.props.search(this.state.value)
-
+    }
   }
 
   render() {

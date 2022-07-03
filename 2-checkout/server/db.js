@@ -17,22 +17,26 @@ db.connectAsync()
     // Expand this table definition as needed:
      db.queryAsync(
       `CREATE TABLE IF NOT EXISTS responses (
-        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        id VARCHAR(255) Not NULL PRIMARY KEY,
+        s_id VARCHAR(255) NOT NULL,
         name VARCHAR(30) NOT NULL,
         email VARCHAR(30) NOT NULL,
         password VARCHAR(30) NOT NULL,
         lineOne VARCHAR(30) NOT NULL,
         lineTwo VARCHAR(30) NOT NULL,
         state VARCHAR(30) NOT NULL,
-        zip INT NOT NULL,
-        phoneNum INT NOT NULL,
-        CCNum INT NOT NULL,
-        expDate INT NOT NULL,
-        CVV INT NOT NULL,
-        billingZip INT NOT NULL
+        zip VARCHAR(30) NOT NULL,
+        phoneNum VARCHAR(30) NOT NULL,
+        CCNum VARCHAR(30) NOT NULL,
+        expDate VARCHAR(30) NOT NULL,
+        CVV VARCHAR(30) NOT NULL,
+        billingZip VARCHAR(30) NOT NULL
            )`
     )
   )
   .catch((err) => console.log(err, "errorr in db.js"));
 
+
 module.exports = db;
+
+

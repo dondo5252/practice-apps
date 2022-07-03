@@ -49,8 +49,8 @@ class App extends React.Component {
     }
 
     checkout () {
-      axios.post('/responses', {
-        cookie: JSON.stringify(document.cookie),
+      axios.post('/checkout', {
+        s_id: document.cookie,
         name: this.state.name,
         email: this.state.email,
         password: this.state.password,
@@ -64,8 +64,8 @@ class App extends React.Component {
         CVV: this.state.CVV,
         billingZip: this.state.billingZip
       })
-      .then(function (response) {
-        console.log(response);
+      .then((response) => {
+        console.log(response,'rerurn on client side');
         this.setState({
           count: 1,
           name: '',
@@ -81,7 +81,7 @@ class App extends React.Component {
           CVV: '',
           billingZip: ''})
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error, "errrooorr posting from client side");
       });
     }
